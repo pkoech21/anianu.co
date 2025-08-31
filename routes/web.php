@@ -3,19 +3,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-// Homepage with login + register forms
+// Homepage
 Route::get('/', function () {
-    return view('home');
+    return view('home'); // home.blade.php with login/register
 })->name('home');
 
-// LOGIN routes
+// Welcome page (after login)
+Route::get('/welcome', function () {
+    return view('welcome'); // welcome.blade.php
+})->name('welcome');
+
+// LOGIN route
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-// REGISTER routes
+// REGISTER route
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 // LOGOUT route
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('welcome');

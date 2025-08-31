@@ -231,23 +231,33 @@
 </head>
 <body>
 
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="navbar-left">
-      <div class="logo">Anianu.com</div>
-    </div>
-    <div class="icons">
-      <a href="#"><i class="fab fa-whatsapp whatsapp"></i></a>
-      <a href="#"><i class="fab fa-youtube youtube"></i></a>
-      <a href="#"><i class="fab fa-facebook facebook"></i></a>
-      <a href="#"><i class="fab fa-twitter twitter"></i></a>
-    </div>
-    <div class="navbar-right">
-      <input type="text" class="search-bar" placeholder="Search...">
-      <button class="nav-btn"><i class="fa fa-user"></i> Account</button>
-      <button class="nav-btn"><i class="fa fa-sign-out-alt"></i> Logout</button>
-    </div>
+<div class="navbar">
+  <div class="navbar-left">
+    <img src="https://via.placeholder.com/40" alt="Profile" class="profile-img">
+    <div class="logo">Anianu.com</div>
   </div>
+
+  <div class="icons">
+    <a href="#"><i class="fab fa-whatsapp whatsapp"></i></a>
+    <a href="#"><i class="fab fa-youtube youtube"></i></a>
+    <a href="#"><i class="fab fa-facebook facebook"></i></a>
+    <a href="#"><i class="fab fa-twitter twitter"></i></a>
+  </div>
+
+  <div class="navbar-right">
+    <input type="text" class="search-bar" placeholder="Search...">
+    <button class="nav-btn"><i class="fa fa-user"></i> Account</button>
+
+    <!-- Laravel Logout -->
+    <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+        @csrf
+        <button type="submit" class="nav-btn">
+            <i class="fa fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+  </div>
+</div>
+
 
   <!-- Main Layout -->
   <div class="main-layout">
@@ -354,6 +364,7 @@
       <button type="button">Search</button>
     </div>
   </div>
+
 
 </body>
 </html>
