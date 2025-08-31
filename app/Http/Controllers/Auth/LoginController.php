@@ -17,7 +17,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('home')->with('success', 'Logged in successfully!');
+            // Redirect to welcome page after successful login
+            return redirect()->route('welcome')->with('success', 'Logged in successfully!');
         }
 
         return back()->withErrors([
@@ -30,6 +31,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('home')->with('success', 'Logged out successfully!');
+        // Redirect to welcome page after logout
+        return redirect()->route('welcome')->with('success', 'Logged out successfully!');
     }
 }

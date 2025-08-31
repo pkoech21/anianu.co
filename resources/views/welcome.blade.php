@@ -1,87 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anianu.com - Welcome</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f7fc; }
-        .title { position: fixed; top: 0; left: 15px; font-size: 26px; font-weight: bold; color: red; font-family: 'Trebuchet MS', sans-serif; z-index: 1000; }
-        .menu-icon { position: fixed; top: 10px; right: 20px; font-size: 26px; cursor: pointer; z-index: 1000; }
-        .menu { display: none; position: fixed; top: 45px; right: 20px; background: white; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); width: 160px; z-index: 999; }
-        .menu a { display: flex; align-items: center; padding: 10px; text-decoration: none; color: #333; font-size: 16px; border-bottom: 1px solid #eee; }
-        .menu a:hover { background: #f1f1f1; }
-        .menu a:last-child { border-bottom: none; }
-        .menu i { margin-right: 8px; color: #007bff; }
-        .form-container { margin-top: 100px; display: flex; justify-content: center; }
-        .form-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0px 4px 8px rgba(0,0,0,0.1); width: 350px; text-align: center; }
-        button.submit { width: 100%; padding: 12px; background: blue; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; }
-        button.submit:hover { background: darkblue; }
-        .alert { margin: 10px 0; padding: 10px; border-radius: 8px; text-align: center; }
-        .alert-success { background: #d4edda; color: #155724; }
-        .alert-error { background: #f8d7da; color: #721c24; }
-    </style>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById("menu");
-            menu.style.display = menu.style.display === "block" ? "none" : "block";
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #f4f4f9;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgb(225, 224, 224);
+      padding: 15px 20px;
+    }
+
+    .navbar .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: red;
+    }
+
+    .navbar .icons {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .navbar .icons a {
+      margin: 0 15px;
+      color: white;
+      font-size: 22px;
+      text-decoration: none;
+    }
+
+    .navbar .icons a:hover {
+      opacity: 0.7;
+    }
+
+    /* Main Content */
+    .content {
+      flex: 1;
+      text-align: center;
+      padding: 40px;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgb(235, 231, 231);
+      color: white;
+      padding: 20px 10px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    .footer .icons a {
+      margin: 0 10px;
+      font-size: 22px;
+      text-decoration: none;
+    }
+    .footer .icons a:hover {
+      opacity: 0.7;
+    }
+
+    /* Social Colors */
+    .home { color: #00c853; }
+    .whatsapp { color: #25D366; }
+    .youtube { color: #FF0000; }
+    .facebook { color: #1877F2; }
+    .twitter { color: #1DA1F2; }
+    .instagram { color: #E1306C; }
+    .linkedin { color: #0A66C2; }
+
+    /* Search Bar */
+    .footer .search-bar {
+      margin-top: 10px;
+    }
+    .footer input[type="text"] {
+      padding: 8px;
+      border-radius: 20px;
+      border: none;
+      width: 60%;
+      max-width: 300px;
+    }
+    .footer button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      background: #00c853;
+      color: white;
+      cursor: pointer;
+    }
+    .footer button:hover {
+      background: #009624;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Title -->
-    <div class="title">Anianu.com</div>
-
-    <!-- Menu Icon -->
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-
-    <!-- Dropdown Menu -->
-    <div class="menu" id="menu">
-        <a href="#"><i class="fas fa-home"></i> Home</a>
-        <a href="#"><i class="fas fa-user"></i> Profile</a>
-        @auth
-        <form method="POST" action="{{ route('logout') }}" style="margin:0;">
-            @csrf
-            <button type="submit" style="border:none;background:none;width:100%;text-align:left;padding:10px;cursor:pointer;">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
-        </form>
-        @endauth
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Anianu.com</div>
+    <div class="icons">
+      <a href="#"><i class="fab fa-whatsapp whatsapp"></i></a>
+      <a href="#"><i class="fab fa-youtube youtube"></i></a>
+      <a href="#"><i class="fab fa-facebook facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter twitter"></i></a>
     </div>
+  </div>
 
-    <!-- Form Section -->
-    <div class="form-container">
-        <div class="form-box">
+  <!-- Main Content -->
+  <div class="content">
+    <h1>Welcome, {{ Auth::user()->name ?? 'Guest' }}!</h1>
+    <p>You have successfully logged in.</p>
+  </div>
 
-            <!-- Flash Messages -->
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-
-            @if($errors->any())
-                <div class="alert alert-error">
-                    @foreach($errors->all() as $error)
-                        <div>{{ $error }}</div>
-                    @endforeach
-                </div>
-            @endif
-
-            @auth
-                <h2>Welcome, {{ Auth::user()->first_name }} 🎉</h2>
-                <p>Your account has been created successfully.</p>
-            @else
-                <!-- Only Login form (no Register) -->
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <input type="email" name="email" placeholder="Email Address" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit" class="submit">Login</button>
-                </form>
-            @endauth
-        </div>
+  <!-- Footer -->
+  <div class="footer">
+    <div class="icons">
+      <a href="{{ route('home') }}" class="home"><i class="fas fa-home"></i></a>
+      <a href="#"><i class="fab fa-whatsapp whatsapp"></i></a>
+      <a href="#"><i class="fab fa-youtube youtube"></i></a>
+      <a href="#"><i class="fab fa-facebook facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin linkedin"></i></a>
+      <a href="mailto:contact@anianu.com"><i class="fas fa-envelope"></i></a>
     </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+  </div>
 
 </body>
 </html>
