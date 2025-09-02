@@ -143,23 +143,62 @@
       display: block;
       border: 1px solid red; /* red frame */
     }
+    .company-frame {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
-    /* Video section */
-    .videos {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 15px;
-      justify-items: center;
-      align-items: center;
-    }
+.company-frame h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0077cc;
+}
 
-    .videos iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-      border: none;
-      border-radius: 5px;
-    }
+.company-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.form-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-btn {
+  padding: 5px 10px;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.form-btn:hover {
+  background: #005fa3;
+}
+
 
     /* Footer */
     .footer {
@@ -299,12 +338,30 @@
      
       <!-- Repeat up to 32 images -->
     </div>
+    <div class="company-frame">
+  <h2>Create Your Company</h2>
+  <form class="company-form">
+    <!-- Username -->
+    <input type="text" placeholder="Username" class="form-input" required>
 
-    <!-- Center Videos -->
-    <div class="videos">
-      <iframe src="https://www.youtube.com/embed/HXIWcTjIM_I" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/HXIWcTjIM_I" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/HXIWcTjIM_I" frameborder="0" allowfullscreen></iframe>
+    <!-- Description -->
+    <textarea placeholder="Description of your company..." class="form-textarea" required></textarea>
+
+    <!-- WhatsApp Number -->
+    <input type="text" placeholder="WhatsApp Number" class="form-input" required>
+
+    <!-- Upload Images -->
+    <label class="form-label">Upload Images</label>
+    <input type="file" class="form-input" accept="image/*" multiple>
+
+    <!-- Social Media URLs -->
+    <input type="url" placeholder="Facebook URL" class="form-input">
+    <input type="url" placeholder="Instagram URL" class="form-input">
+    <input type="url" placeholder="Twitter URL" class="form-input">
+    <input type="url" placeholder="LinkedIn URL" class="form-input">
+
+    <button type="submit" class="form-btn">Create Company</button>
+    </form>
     </div>
 
     <!-- Right Images -->

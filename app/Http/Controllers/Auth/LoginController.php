@@ -18,7 +18,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             // Redirect to welcome page after successful login
-            return redirect()->route('welcome')->with('success', 'Logged in successfully!');
+            return redirect()->route('dashboard')->with('success', 'Logged in successfully!');
         }
 
         return back()->withErrors([
