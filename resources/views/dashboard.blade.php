@@ -11,14 +11,109 @@
       padding: 0;
       background: #f4f6f9;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
       min-height: 100vh;
     }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: #007bff;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 7000;
+    }
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .menu-btn {
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Drawer Menu */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -260px; /* hidden off-screen */
+      width: 260px;
+      height: 100%;
+      background: #fff;
+      box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s ease;
+      z-index: 2000;
+    }
+    .drawer.open {
+      right: 0;
+    }
+    .drawer-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .close-drawer {
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+    .drawer a,
+    .drawer button.logout {
+      padding: 12px 15px;
+      text-decoration: none;
+      color: #333;
+      border: none;
+      background: none;
+      text-align: left;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .drawer a:hover,
+    .drawer button.logout:hover {
+      background: #f1f1f1;
+    }
+    .drawer button.logout {
+      background: #dc3545;
+      color: white;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    .drawer button.logout:hover {
+      background: #b02a37;
+    }
+
+    /* Overlay */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      z-index: 1500;
+    }
+    .drawer-overlay.active {
+      display: block;
+    }
+
+    /* Form container */
     .container {
       width: 100%;
       max-width: 500px;
       padding: 20px;
+      margin: 20px auto;
+      flex-grow: 1;
     }
     h2 {
       text-align: center;
@@ -121,6 +216,28 @@
   </style>
 </head>
 <body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Anianu.com</div>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </div>
+
+  <!-- Drawer Menu -->
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <span class="close-drawer" onclick="toggleMenu()">&times;</span>
+    </div>
+    <a href="/">Home</a>
+    <a href="/profile">Profile</a>
+    <a href="/dashboard">Dashboard</a>
+    <form method="POST" action="{{ route('logout') }}">
+      @csrf
+      <button type="submit" class="logout">Logout</button>
+    </form>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleMenu()"></div>
+
   <div class="container">
     <!-- Preview Card -->
     <div id="previewCard" class="card">
@@ -173,6 +290,13 @@
   </div>
 
   <script>
+    function toggleMenu() {
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('drawerOverlay');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('active');
+    }
+
     const profileCircle = document.getElementById("profileCircle");
     const profileInput = document.getElementById("profileInput");
     let profileImage = "";
@@ -230,19 +354,16 @@
     function postCard() {
       const formData = new FormData();
 
-      // Profile file
       const profileFile = document.getElementById("profileInput").files[0];
       if (profileFile) {
         formData.append("profile", profileFile);
       }
 
-      // Text fields
       formData.append("title", document.getElementById("cardTitle").innerText);
       formData.append("description", document.getElementById("cardDesc").innerText);
       formData.append("whatsapp", document.getElementById("cardWhatsapp").innerText);
       formData.append("social", document.getElementById("cardSocial").href);
 
-      // Images
       const images = document.getElementById("images").files;
       for (let i = 0; i < images.length; i++) {
         formData.append("images[]", images[i]);
